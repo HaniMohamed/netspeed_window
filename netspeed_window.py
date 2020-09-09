@@ -40,9 +40,9 @@ def print_rate(rate):
 
 def check_connection():
     try:
-        request = requests.get(url, timeout=timeout)
+        requests.get(url, timeout=timeout)
         return True
-    except (requests.ConnectionError, requests.Timeout) as exception:
+    except (requests.ConnectionError, requests.Timeout):
         return False
 
 
@@ -71,7 +71,7 @@ window.call('wm', 'attributes', '.', '-topmost', True)
 
 
 
-greeting = tk.Label(text="Retrieving data ..", fg="grey", bg="black",borderwidth=1, relief="ridge")
+greeting = tk.Label(text="Retrieving data ..", fg="#f8f8f2", bg="#282a36",borderwidth=1, relief="raised", cursor="exchange")
 greeting.grid()
 
 def main_loop() :    
@@ -79,9 +79,9 @@ def main_loop() :
     up,down = print_rate(transfer_rate)
     greeting["text"] =u"\u21D1" + up +u" - \u21D3" +down
     if(check_connection()):
-        greeting["fg"] = "white"
+        greeting["fg"] = "#8be9fd"
     else:
-        greeting["fg"] = "red"
+        greeting["fg"] = "#ff5555"
 
     window.after(1000,main_loop)
 
