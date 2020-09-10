@@ -23,7 +23,7 @@ def get_current_interface():
     try:        
         return netifaces.gateways()['default'][netifaces.AF_INET][1]
     except:
-        return "None"
+        return "Disconnected"
 
 def calc_ul_dl(rate, dt=2, interface=get_current_interface()):
     t0 = time.time()
@@ -80,8 +80,6 @@ def main_loop() :
 
     if(check_connection()):
         greeting["fg"] = "#8be9fd"
-
-        
     else:
         greeting["fg"] = "#ff5555"
 
