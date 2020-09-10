@@ -19,7 +19,11 @@ greeting.grid()
 
 
 def get_current_interface():
-    return netifaces.gateways()['default'][netifaces.AF_INET][1]
+    
+    try:        
+        return netifaces.gateways()['default'][netifaces.AF_INET][1]
+    except:
+        return "None"
 
 def calc_ul_dl(rate, dt=2, interface=get_current_interface()):
     t0 = time.time()
@@ -70,10 +74,14 @@ def main_loop() :
     time.sleep(1)
     if(interface is not get_current_interface()):
         run_thread()
+
     up,down = print_rate(transfer_rate)
     greeting["text"] ="["+get_current_interface()+"]  "+ u"\u21D1" + up +u" - \u21D3" +down
+
     if(check_connection()):
         greeting["fg"] = "#8be9fd"
+
+        
     else:
         greeting["fg"] = "#ff5555"
 
